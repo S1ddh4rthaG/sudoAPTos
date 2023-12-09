@@ -1,0 +1,10 @@
+{
+  "extends": "../../../../tsconfig.packages.json",
+  "compilerOptions": {
+    "typeRoots": ["../../../../node_modules/@types"],
+    "experimentalDecorators": true,
+    "target": "es5"
+  },
+  "files": ["./node_modules/@metamask/snap-types/global.d.ts"],
+  "include": ["src"]
+}

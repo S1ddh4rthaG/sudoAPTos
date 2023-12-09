@@ -1,0 +1,34 @@
+{
+  "version": "0.0.1",
+  "description": "Aptos on Metamask",
+  "proposedName": "Aptos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kyraview/AptosSnap.git"
+  },
+  "source": {
+    "shasum": "vk/BD09CbqYgRFDrpNYv9a4Q4nyB8qeJhaLvMfcTfKo=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "meta-aptos",
+        "registry": "https://registry.npmjs.org/",
+        "iconPath": "images/icon.svg"
+      }
+    }
+  },
+  "initialPermissions": {
+    "snap_dialog": {},
+    "endowment:network-access": {},
+    "snap_getBip44Entropy": [
+      {
+        "coinType": 637
+      }
+    ],
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    }
+  },
+  "manifestVersion": "0.1"
+}

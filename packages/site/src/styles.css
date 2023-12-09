@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  background-color: rgb(18, 22, 21);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  background-color: rgb(18, 22, 21);
+  padding: 10px;
+  text-align: center;
+}
+
+.header-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.testnet {
+  background-color: green !important;
+}
+
+.devnet {
+  background-color: red !important;
+}
+
+.mainnet {
+  background-color: blue !important;
+}
+
+
+/* Main */
+.main .card-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main-address {
+  background-color: rgb(54, 58, 57);
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: semi-bold;
+  font-family: 'Montserrat', sans-serif;
+  border: solid 0.5px rgb(27, 31, 30);
+  border-radius: 15px;
+}
+
+.main-balance {
+  font-size: 27px;
+}
+
+.main .nav-link {
+  /* color: Muted */
+  /* Color should be muted style */
+  color: #fff !important;
+  opacity: 0.6 !important;
+  font-size: 18px !important;
+  font-weight: semi-bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main .nav-pills .active {
+  background-color: rgb(40, 45, 44) !important;
+  opacity: 1 !important;
+}
+
+/* Footer */
+.footer {
+  border: solid 0px #fff !important;
+}
+
+/* General */
+.dropdown-menu-dark {
+  background-color: rgb(27, 31, 30);
+  color: #fff;
+}
+
+.dropdown-item {
+  font: 14px 'Montserrat', sans-serif;
+  padding: 10px;
+  font-weight: 600 !important;
+}
+
+.btn {
+  background-color: rgb(27, 31, 30);
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: solid 0.5px rgb(27, 31, 30);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-2 {
+  background-color: rgb(27, 31, 30);
+  color: #fff !important;
+}
+
+.bg-1 {
+  background-color: rgb(18, 22, 21);
+  color: #fff !important;
+}
