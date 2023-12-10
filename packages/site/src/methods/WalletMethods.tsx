@@ -272,3 +272,23 @@ export const transfer = async (snapId: any,address:string,amount:string) => {
 //   // parent.appendChild(link);
 // }
 
+
+export const getAccountModules = async (snapId: any) => {
+  console.log('get account modules')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getAccountModules'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
