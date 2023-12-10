@@ -66,6 +66,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
       await fetch(devNetFaucetUrl+"/mint"+"?address="+HexString.ensure(userAccount.address().toString()).noPrefix()+"&amount=10000000", {method:"post"})
       return true;
     case 'getBalance':
+      // console.log("index.ts: Log Balance")
       return await walletfunctions.getAptosBalance()
     
     case 'dispBalance':
@@ -78,17 +79,64 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
       const output = await walletfunctions.transfer(toAccount, Amount);
       return output
       
-    case 'getModules':
-      console.log("index: getAM");
-      return await Metamask.sendAlert();
-      // return await walletfunctions.getAccountModules();
+    // case 'getModules':
+    //   console.log("index: getAM");
+    //   return await Metamask.sendAlert();
+    //   // return await walletfunctions.getAccountModules();
 
-    case 'getResources':
-      console.log("index: getAM");
-      return await walletfunctions.getResources();
-
+    // case 'getResources':
+    //   console.log("index: getAM");
+    //   return await walletfunctions.getResources();
     
-      
+    /*Accounts */
+
+    case 'getAccount':
+      console.log("index: getAccount");
+      return await walletfunctions.getAccount();
+    
+    case 'getAccountResources':
+      console.log("index: getAccountResources");
+      return await walletfunctions.getAccountResources();
+
+    case 'getAccountModules':
+      console.log("index: getAccountModules");
+      return await walletfunctions.getAccountModules();
+
+    case 'getAccountResource':
+      console.log("index: getAccountResource");
+      const resource_type:string = request.params.resource_type;
+      return await walletfunctions.getAccountResource(resource_type);
+
+    case 'getAccountModule':
+      console.log("index: getAccountModule");
+      const module_name:string = request.params.module_name;
+      return await walletfunctions.getAccountModule(module_name);
+
+    /*Transactions */
+    case 'getTransactions':
+      console.log("index: getTransactions");
+      return await walletfunctions.getTransactions();
+    
+    case 'getTransactionByHash':
+      console.log("index: getTransactionByHash");
+      const txn_hash:string = request.params.txn_hash;
+      return await walletfunctions.getTransactionByHash(txn_hash);
+
+    case 'getTransactionByVersion':
+      console.log("index: getTransactionByVersion");
+      const txn_version:string = request.params.txn_version;
+      return await walletfunctions.getTransactionByVersion(txn_version);
+
+    case 'getAccountTransactions':
+      console.log("index: getAccountTransactions");
+      return await walletfunctions.getAccountTransactions();
+
+    case 'estimateGasPrice':
+      console.log("index: estimateGasPrice");
+      return await walletfunctions.estimateGasPrice();
+    
+
+
     default:
       throw new Error('Method not found.');
   }

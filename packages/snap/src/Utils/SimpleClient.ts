@@ -95,47 +95,137 @@ export class SimpleClient {
     )
   }
 
-//   async getAccountResource(address:string,resource_type:string){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/accounts/${address}/resource/${resource_type}`)
-//     )
-//   }
+  async getAccountResource(address:string,resource_type:string){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/accounts/${address}/resource/${resource_type}`)
+    )
+  }
 
-//   async getAccountModule(address:string,module_name:string){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/accounts/${address}/module/${module_name}`)
-//     )
-//   }
+  async getAccountModule(address:string,module_name:string){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/accounts/${address}/module/${module_name}`)
+    )
+  }
 
-//   /*Blocks*/
-//   async getBlockByHeight(block_height:bigint ){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/blocks/by_height/${block_height}`)
-//     )
-//   }
+  /*Blocks*/
+  async getBlockByHeight(block_height:bigint ){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/blocks/by_height/${block_height}`)
+    )
+  }
 
-//   async getBlockByVersion(version:bigint ){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/blocks/by_version/${version}`)
-//     )
-//   }
-
-
-//   /*Events*/
-//   async getEventsByCreationNumber(address:string,creation_number:string){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/accounts/${address}/events/${creation_number}`)
-//     )
-//   }
-//   async getEventsByEventHandle(address:string,event_handle:string,field_name:string){
-//     return (
-//       await NetworkRequest.get(`${this.baseURL}/accounts/${address}/events/${event_handle}/${field_name}`)
+  async getBlockByVersion(version:bigint ){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/blocks/by_version/${version}`)
+    )
+  }
 
 
-//   /*General*/
+  /*Events*/
+  async getEventsByCreationNumber(address:string,creation_number:string){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/accounts/${address}/events/${creation_number}`)
+    )
+  }
+
+  async getEventsByEventHandle(address:string,event_handle:string,field_name:string){
+    return (
+      await NetworkRequest.get(`${this.baseURL}/accounts/${address}/events/${event_handle}/${field_name}`)
+    )
+  }
+
 //   /*Tables*/
+async getTableItem(table_handle:string,table_item:any){
+    return (
+      await NetworkRequest.postBytes(`${this.baseURL}/tables/${table_handle}/item`,
+      table_item)
+    )
+}
+
+
+async getRawTableItem(table_handle:string,table_item:any){
+  return (
+    await NetworkRequest.postBytes(`${this.baseURL}/tables/${table_handle}/raw_item`,
+    table_item)
+  )
+}
+
 //   /*Transaction*/
-//   /*Views*/
 
+async getTransactions(){
+  return (
+    await NetworkRequest.get(`${this.baseURL}/transactions`)
+  )
+}
 
+async submitTransaction(body: any) {
+  return (
+    await NetworkRequest.postBytes(
+      `${this.baseURL}/transactions`,
+      body,
+    )
+  )
+}
+
+async getTransactionByHash(txn_hash:string){
+  return (
+    await NetworkRequest.get(`${this.baseURL}/transactions/by_hash/${txn_hash}`)
+  )
+}
+
+async getTransactionByVersion(txn_version:string){
+  return (
+    await NetworkRequest.get(`${this.baseURL}/transactions/by_version/${txn_version}`)
+  )
+}
+
+async getAccountTransactions(address:string){
+  return (
+    await NetworkRequest.get(`${this.baseURL}/accounts/${address}/transactions`)
+  )
+}
+
+async submitBatchTransaction(body: any) {
+  return (
+    await NetworkRequest.postBytes(
+      `${this.baseURL}/transactions/batch`,
+      body,
+    )
+  )
+}
+
+async simulateTransaction(body: any) {
+  return (
+    await NetworkRequest.postBytes(
+      `${this.baseURL}/transactions/simulate`,
+      body,
+    )
+  )
+}
+
+async encodeSubmissions(body: any) {
+  return (
+    await NetworkRequest.postBytes(
+      `${this.baseURL}/transactions/encode_submission`,
+      body,
+    )
+  )
+}
+
+async estimateGasPrice(){
+  return (
+    await NetworkRequest.get(`${this.baseURL}/estimate_gas_price`)
+  )
+}
+
+  /*Views*/
+
+async executeViewFunctionOfAModule(view:any){
+  return (
+    await NetworkRequest.postBytes(
+      `${this.baseURL}/view`,
+      view,
+    )
+  )
+}
 }

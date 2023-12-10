@@ -163,3 +163,112 @@ export const fundAccount = async (snapId: any) => {
   console.log(result);
 
 }
+
+export const getAccountResources = async (snapId: any) => {
+  console.log('get account resources')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getAccountResources'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const getAccountTransactions = async (snapId: any) => {
+  console.log('get account transactions')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getAccountTransactions'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const getAccountTransactionbyHash = async (snapId: any) => {
+  console.log('get account transaction by Hash')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getAccountTransactionbyHash'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const transfer = async (snapId: any,address:string,amount:string) => {
+  console.log('transfer')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'transfer',
+          params: {
+            to: address,
+            amount: amount
+          }
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+// async function transfer()
+//   let address = document.getElementById('address').value;
+//   let amount = document.getElementById('amount').value;
+//   const out = await ethereum.request({
+//       method: 'wallet_invokeSnap',
+//       params: {
+//         snapId, 
+//         request: {
+//         method: 'transfer',
+//         params: {
+//           to: address,
+//           amount: amount
+//         }
+//       }
+//     }
+//   })
+//   console.log(out);
+//   // const parent = document.getElementById("transactions")
+//   // const link = document.createElement('a');
+//   // link.innerText = `https://fullnode.devnet.aptoslabs.com/v1/transactions/by_hash/${out.hash}`
+//   // link.href= `https://fullnode.devnet.aptoslabs.com/v1/transactions/by_hash/${out.hash}`
+//   // parent.appendChild(link);
+// }
+

@@ -88,80 +88,88 @@ export class WalletFuncs {
     return await this.client.getAccountModules(this.account.address().toString());
   }
 
+  async getAccountResource(resource_type:string){
+    return await this.client.getAccountResource(this.account.address().toString(),resource_type);
+  }
 
-  // async getAccountResource(resource_type:string){
-  //   return await this.client.getAccountResource(this.account.address().toString(),resource_type);
-  // }
+  async getAccountModule(module_name:string){
+    return await this.client.getAccountModule(this.account.address().toString(),module_name);
+  }
 
-  // async getAccountModule(module_name:string){
-  //   return await this.client.getAccountModule(this.account.address().toString(),module_name);
-  // }
-
-  // /*Blocks */
+  /*Blocks */
   
-  // async getBlockByHeight(block_height:bigint ){
-  //   return await this.client.getBlockByHeight(block_height);
-  // }
+  async getBlockByHeight(block_height:bigint ){
+    return await this.client.getBlockByHeight(block_height);
+  }
 
-  // async getBlockByVersion(version:bigint ){
-  //   return await this.client.getBlockByVersion(version);
-  // }
+  async getBlockByVersion(version:bigint ){
+    return await this.client.getBlockByVersion(version);
+  }
 
-  // /*Events*/
+  /*Events*/
 
-  // async getEventsByCreationNumber(creation_number: string){
-  //   return await this.client.getEventsByCreationNumber(this.account.address().toString(),creation_number);
-  // }
+  async getEventsByCreationNumber(creation_number: string){
+    return await this.client.getEventsByCreationNumber(this.account.address().toString(),creation_number);
+  }
 
-  // async getEventsByEventHandle(event_handle:string,field_name:string){
-  //   return await this.client.getEventsByEventHandle(this.account.address().toString(),event_handle,field_name);
-  // }
-
-
-  // /*General*/
-
-  // async getOpenAPIExplorer(){
-  //   return await this.client.getOpenAPIExplorer();
-  // }
-
-  // async getNodeHealth(){
-  //   return await this.client.getNodeHealth();
-  // }
-
-  // async getLedgerInfo(){
-  //   return await this.client.getLedgerInfo();
-  // }
+  async getEventsByEventHandle(event_handle:string,field_name:string){
+    return await this.client.getEventsByEventHandle(this.account.address().toString(),event_handle,field_name);
+  }
 
 
-  // /*Tables*/
 
-  // async getTableItem(table_handle:string){
-  //   return await this.client.getTableItem(table_handle);
-  // }
+  /*Tables*/
 
-  // async getRawTableItem(table_handle:string){
-  //   return await this.client.getRawTableItem(table_handle);
-  // }
+  async getTableItem(table_handle:string,table_item:any){
+    return await this.client.getTableItem(table_handle,table_item);
+  }
+
+  async getRawTableItem(table_handle:string,table_item:any){
+    return await this.client.getRawTableItem(table_handle,table_item);
+  }
 
 
-  // /*Transactions*/
+  /*Transactions*/
   
-  // async getTransactions(table_handle:string){
-  //   return await this.client.getTransactions(table_handle);
-  // }
+  async getTransactions(){
+    return await this.client.getTransactions();
+  }
 
-  // async getTransactionByHash(txn_hash:string){
-  //   return await this.client.getTransactionByHash(txn_hash);
-  // }
+  async submitTransaction(txn:any){
+    return await this.client.submitTransaction(txn);
+  }
 
-  // async getTransactionByVersion(txn_version:string){
-  //   return await this.client.getTransactionByVersion(txn_version);
-  // }
+  async getTransactionByHash(txn_hash:string){
+    return await this.client.getTransactionByHash(txn_hash);
+  }
 
-  // async getAccountTransactions(){
-  //   return await this.client.getAccountTransactions(this.account.address().toString());
-  // }
+  async getTransactionByVersion(txn_version:string){
+    return await this.client.getTransactionByVersion(txn_version);
+  }
 
+  async getAccountTransactions(){
+    return await this.client.getAccountTransactions(this.account.address().toString());
+  }
 
+  async submitBatchTransactions(txns:any){
+    return await this.client.submitBatchTransactions(txns);
+  }
+
+  async simulateTransaction(txn:any){
+    return await this.client.simulateTransaction(txn);
+  }
+
+  async encodeSubmission(txn:any){
+    return await this.client.encodeSubmission(txn);
+  }
+
+  async estimateGasPrice(){
+    return await this.client.estimateGasPrice();
+  }
+
+  /*Views*/
+  async executeViewFunctionOfAModule(view:any){
+    return await this.client.executeViewFunctionOfAModule(view);
+  }
 
 }
