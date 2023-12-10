@@ -2,6 +2,8 @@ import { connect, getAddress, switchAccount, createAccount, getBalance, fundAcco
 import { useEffect, useState, useContext } from 'react';
 
 import { WalletContext } from '../../context/WalletContext';
+import { TitleBar } from '../TitleBar';
+import { JSONview } from '../JSONview';
 
 export const Module = ({isActive}) => {
   const { SNAP_ID } = useContext(WalletContext);
@@ -11,9 +13,9 @@ export const Module = ({isActive}) => {
   
   const [modules,setModules] = useState([]);
   const [done, setDone] = useState(false);
+  
   useEffect(() => {
-    // Fetch account info when the component becomes active
-    if (isActive) {
+    if (isActive && ACTIVE) {
       getAccountModules(SNAP_ID).then((result) => {
         console.log(result);
         setModules(result);
@@ -25,29 +27,26 @@ export const Module = ({isActive}) => {
 
   return (
     <>
-    <h1>Modules</h1>
-
-
-    
-    {done ? (
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
+    <TitleBar title="Modules"/>
+    {done || true ? (
+        <div className="container m-0 p-0 mt-3">
+        <div className="row m-0 p-0">
+          <div className="col m-0 p-0">
+            <div className="card p-0 m-0 border-0 bg-2">
               <div className="card-body">
-                <h5 className="card-title">Modules</h5>
-                <p className="card-text">{JSON.stringify(modules)}</p>
+                {/* <p className="card-text">{JSON.stringify(modules)}</p> */}
+                <JSONview json={modules} />
               </div>
             </div>
           </div>
         </div>
       </div>
     ) :(
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <div className="card-body text-center">
+      <div className="container m-0 p-0 mt-3">
+      <div className="row m-0 p-0">
+        <div className="col m-0 p-0">
+          <div className="card p-0 m-0 border-0">
+              <div className="card-body p-2 bg-2 text-center">
                 <h5 className="card-title">Resources</h5>
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Loading...</span>

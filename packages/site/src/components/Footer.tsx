@@ -7,7 +7,6 @@ export const Footer = () => {
             <p className="text-light align-middle m-0 footer-text">© sudoAptos 2023. All Rights Reserved</p>
           </div>
           <div className="col-2 text-end p-0 m-0">
-            {/* Github logo using bootstrap icons */}
             <a href="#" className="text-light align-middle m-0 footer-text fs-5">
               <i className="bi bi-github"></i>
             </a>

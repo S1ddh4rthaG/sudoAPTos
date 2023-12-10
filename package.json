@@ -62,6 +62,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "react-json-view": "^1.21.3"
   }
 }

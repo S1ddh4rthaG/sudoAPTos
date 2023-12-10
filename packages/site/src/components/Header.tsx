@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect, getAddress, createAccount, switchAccount } from '../methods/index';
 
 import { WalletContext } from '../context/WalletContext';
+import { printAddress } from '../utils/functionals';
 
 export const Header = () => {
   const [reconnect, setReconnect] = useState(false);
   const [network, setNetwork] = useState('devnet');
-  const [accountName, setAccountName] = useState('0x123...456');
+  const [accountName, setAccountName] = useState('Account');
   const [snapId, setSnapId] = useState('');
 
   const { setSNAP_ID } = React.useContext(WalletContext);
@@ -49,7 +50,7 @@ export const Header = () => {
             </div>
             <div className="dropdown ms-1 pe-5">
               <button className="btn btn-secondary dropdown-toggle header-account" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {accountName}
+                {printAddress(accountName)}
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
 
@@ -63,8 +64,10 @@ export const Header = () => {
               connect(snapId).then(async (result) => {
                 if (result) {
                   setReconnect(true);
+                  setACTIVE(true);
                 } else {
                   setReconnect(false);
+                  setACTIVE(false);
                 }
               })
             }}>
