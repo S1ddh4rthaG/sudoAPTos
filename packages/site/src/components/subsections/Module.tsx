@@ -3,43 +3,61 @@ import { useEffect, useState, useContext } from 'react';
 
 import { WalletContext } from '../../context/WalletContext';
 
-export const Module = () => {
+export const Module = ({isActive}) => {
   const { SNAP_ID } = useContext(WalletContext);
   const { ACTIVE } = useContext(WalletContext);
   const { ADDR } = useContext(WalletContext);
   const { NETWORK } = useContext(WalletContext);
   
   const [modules,setModules] = useState([]);
-
-  return (
-    <>
-    <h1>Module</h1>
-
-    <button className="btn btn-primary btn-lg mt-3" onClick={() => {
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    // Fetch account info when the component becomes active
+    if (isActive) {
       getAccountModules(SNAP_ID).then((result) => {
         console.log(result);
         setModules(result);
+        setDone(true);
       });
     }
-    }>getAccountModules</button>
+  }, [isActive]); 
 
 
-  <div className="container">
-      <div className="row">
-        <div className="col">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Modules</h5>
-              <p className="card-text">{JSON.stringify(modules)}</p>
+  return (
+    <>
+    <h1>Resources</h1>
+
+
+    
+    {done ? (
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Modules</h5>
+                <p className="card-text">{JSON.stringify(modules)}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
+    ) : (
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Modules</h5>
+                <p className="card-text">Loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
 
     </>
-
-
+  
   )
 }

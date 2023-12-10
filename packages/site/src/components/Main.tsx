@@ -15,6 +15,11 @@ export const Main = () => {
   const { NETWORK } = useContext(WalletContext);
 
   const [balance, setBalance] = useState(0);
+  const [activeTab, setActiveTab] = useState('account');
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
 
   return (
@@ -55,28 +60,31 @@ export const Main = () => {
             <div className="d-flex p-0">
               <div className="nav nav-pills pe-2 bg-1 rounded-0">
                 <div id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <button className="nav-link active text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="true"><i className="m-2 bi bi-person-rolodex"></i>Account</button>
-                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-transactions-tab" data-bs-toggle="pill" data-bs-target="#v-pills-transactions" type="button" role="tab" aria-controls="v-pills-transactions" aria-selected="false"><i className="m-2 bi bi-card-checklist"></i>Transactions</button>
-                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-transfer_fund-tab" data-bs-toggle="pill" data-bs-target="#v-pills-transfer_fund" type="button" role="tab" aria-controls="v-pills-transfer_fund" aria-selected="false"><i className="m-2 bi bi-send"></i>Transfer/Fund</button>
-                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-resources-tab" data-bs-toggle="pill" data-bs-target="#v-pills-resources" type="button" role="tab" aria-controls="v-pills-resources" aria-selected="false"><i className="m-2 bi bi-segmented-nav"></i>Resources</button>
-                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-modules-tab" data-bs-toggle="pill" data-bs-target="#v-pills-modules" type="button" role="tab" aria-controls="v-pills-modules" aria-selected="false"><i className="m-2 bi bi-box"></i>Modules</button>
+                  <button className="nav-link active text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" 
+                    type="button" role="tab" aria-controls="v-pills-account" aria-selected="true"
+                    onClick={() => {handleTabClick('account')}}>
+                      <i className="m-2 bi bi-person-rolodex"></i>Account</button>
+                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-transactions-tab" data-bs-toggle="pill" data-bs-target="#v-pills-transactions" type="button" role="tab" aria-controls="v-pills-transactions" aria-selected="false"  onClick={() => {handleTabClick('transactions')}}><i className="m-2 bi bi-card-checklist"></i>Transactions</button>
+                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-transfer_fund-tab" data-bs-toggle="pill" data-bs-target="#v-pills-transfer_fund" type="button" role="tab" aria-controls="v-pills-transfer_fund" aria-selected="false" onClick={() => {handleTabClick('transfer')}}><i className="m-2 bi bi-send" ></i>Transfer/Fund</button>
+                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-resources-tab" data-bs-toggle="pill" data-bs-target="#v-pills-resources" type="button" role="tab" aria-controls="v-pills-resources" aria-selected="false"  onClick={() => {handleTabClick('resources')}}><i className="m-2 bi bi-segmented-nav"></i>Resources</button>
+                  <button className="nav-link text-start pt-3 pb-3 fs-5" style={{ width: "250px" }} id="v-pills-modules-tab" data-bs-toggle="pill" data-bs-target="#v-pills-modules" type="button" role="tab" aria-controls="v-pills-modules" aria-selected="false" onClick={() => {handleTabClick('modules')}}><i className="m-2 bi bi-box" ></i>Modules</button>
                 </div>
               </div>
               <div className="tab-content w-100 h-100 p-2" id="v-pills-tabContent">
                 <div className="tab-pane fade show active" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
-                  <Account />
+                  <Account isActive={activeTab === 'account'} />
                 </div>
                 <div className="tab-pane fade" id="v-pills-resources" role="tabpanel" aria-labelledby="v-pills-resources-tab">
-                  <Resources />
+                  <Resources isActive={activeTab === 'resources'} />
                 </div>
                 <div className="tab-pane fade" id="v-pills-modules" role="tabpanel" aria-labelledby="v-pills-modules-tab">
-                  <Module />
+                  <Module isActive={activeTab === 'modules'} />
                 </div>
                 <div className="tab-pane fade" id="v-pills-transfer_fund" role="tabpanel" aria-labelledby="v-pills-transfer_fund-tab">
-                  <Transfer />
+                  <Transfer isActive={activeTab === 'transfer'} />
                 </div>
                 <div className="tab-pane fade" id="v-pills-transactions" role="tabpanel" aria-labelledby="v-pills-transactions-tab">
-                  <Transactions />
+                  <Transactions isActive={activeTab === 'transactions'} />
                 </div>
               </div>
             </div>

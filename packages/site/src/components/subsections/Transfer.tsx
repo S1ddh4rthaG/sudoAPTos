@@ -21,6 +21,8 @@ export const Transfer = () => {
     <div className="input-group mb-3">
       <span className="input-group-text" id="basic-addon1">Address</span>
       <input type="text" className="form-control" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1" onChange={(e) => setAddress(e.target.value)} />
+    </div>
+    <div className="input-group mb-3">
       <span className="input-group-text" id="basic-addon1">Amount</span>  
       <input type="text" className="form-control" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon1" onChange={(e) => setAmount(e.target.value)} />
     </div>
