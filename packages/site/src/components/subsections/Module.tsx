@@ -25,7 +25,7 @@ export const Module = ({isActive}) => {
 
   return (
     <>
-    <h1>Resources</h1>
+    <h1>Modules</h1>
 
 
     
@@ -42,14 +42,16 @@ export const Module = ({isActive}) => {
           </div>
         </div>
       </div>
-    ) : (
+    ) :(
       <div className="container">
         <div className="row">
           <div className="col">
             <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Modules</h5>
-                <p className="card-text">Loading...</p>
+              <div className="card-body text-center">
+                <h5 className="card-title">Resources</h5>
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               </div>
             </div>
           </div>
