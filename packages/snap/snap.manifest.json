@@ -7,7 +7,7 @@
     "url": "https://github.com/Kyraview/AptosSnap.git"
   },
   "source": {
-    "shasum": "FNXadARDIO3MaOluKWhlFW8i45RysbNLbX4qdx4ZDM8=",
+    "shasum": "R/17KbXJBnyWpt3qf5ltYmrkWVKEXfmUotkVMjWkHk4=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -19,6 +19,9 @@
   },
   "initialPermissions": {
     "snap_dialog": {},
+    "snap_notify": {},
+    "snap_manageState": {},
+    "endowment:transaction-insight": {},
     "endowment:network-access": {},
     "snap_getBip44Entropy": [
       {
@@ -28,6 +31,22 @@
     "endowment:rpc": {
       "dapps": true,
       "snaps": false
+    },
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "balanceCheck"
+          }
+        },
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "transactionCheck"
+          }
+        }
+      ]
     }
   },
   "manifestVersion": "0.1"

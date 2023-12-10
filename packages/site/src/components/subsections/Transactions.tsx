@@ -39,7 +39,7 @@ export const Transactions = ({ isActive }) => {
     };
 
     return (
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center p-1 rounded bg-primary text-light">
         <span className="sender-address" title="Click to copy" onClick={copyToClipboard}>
           {briefAddress}
         </span>
@@ -61,9 +61,10 @@ export const Transactions = ({ isActive }) => {
                   <div className="table-responsive">
                     <table className="table table-striped">
                       <thead className="table-dark">
-                        <tr>
+                        <tr className='text-center'>
                           <th>VERSION</th>
                           <th>TYPE</th>
+                          <th>SUCCESS</th>
                           <th>TIMESTAMP</th>
                           <th>SENDER</th>
                           <th>SENT TO</th>
@@ -72,10 +73,15 @@ export const Transactions = ({ isActive }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {transactions.map((transaction, index) => (
-                          <tr key={index}>
+                        {transactions?.map((transaction, index) => (
+                          <tr key={index} className='text-center'>
                             <td>{transaction.version}</td>
                             <td>{transaction.type}</td>
+                            <td>{transaction.success ? (
+                              <i className="bi bi-check-circle-fill text-success"></i>
+                            ) : (
+                              <i className="bi bi-x-circle-fill text-danger"></i>
+                            )}</td>
                             <td>{formatTimestamp(transaction.timestamp)}</td>
                             <td>{displayAndCopyAddress(transaction.sender)}</td>
                             <td>{displayAndCopyAddress(transaction.payload.arguments[0])}</td>
@@ -91,7 +97,7 @@ export const Transactions = ({ isActive }) => {
             </div>
           </div>
         </div>
-      ) :(
+      ) : (
         <div className="container">
           <div className="row">
             <div className="col">

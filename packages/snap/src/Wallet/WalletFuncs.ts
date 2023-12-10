@@ -43,24 +43,21 @@ export class WalletFuncs {
     );
   }
 
-  async transfer(address: string, amount: bigint | string | number) {
+  async transfer(address: string, amount: bigint | string | number, network: 'mainnet' | 'testnet' | 'devnet' = 'devnet') {
     const amount_bigint : bigint = BigInt(amount);
-    console.log('here');
-    
-    const confirm = await Metamask.paymentConfirmation(amount_bigint, address, "devnet");
+    const gasEstimate = await this.client.estimateGasPrice();
+
+    const confirm = await Metamask.paymentConfirmation(amount_bigint, address, network, gasEstimate.gas_estimate);
     if (!confirm) {
-      return Metamask.throwError(4300, 'user rejected request');
+      return Metamask.throwError(4300, 'User Rejected the Transaction');
     }
-    console.log('passed confirm');
+
     const payload = TransactionCreator.buildTransferPayload(address, amount_bigint);
-    console.log('passed payload creation');
     const rawTransferTxn = await this.txnCreator.buildRawTransactionFromPayload(
       this.account,
       payload,
     );
-    console.log('passed raw transaction creation');
     const sig = this.txnSigner.sign(rawTransferTxn);
-    console.log('passed signature');
     return await this.client.postTxn(sig);
   }
 

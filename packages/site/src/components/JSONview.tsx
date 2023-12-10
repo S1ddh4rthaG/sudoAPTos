@@ -1,9 +1,13 @@
-import ReactJson from "react-json-view";
+// import ReactJson from "react-json-view";
+// let ReactJsonView;
+// if (typeof window !== 'undefined') {
+//   ReactJsonView = require('react-json-view').default;
+// }
 
 export const JSONview = (props) => {
   return (
     <div className="row m-0 p-1 rounded shadow-sm bg-secondary">
-      <ReactJson src={props.json}
+      {/* {ReactJsonView && <ReactJson src={props.json}
         theme="pop"
         iconStyle="circle"
         enableClipboard={true}
@@ -12,6 +16,8 @@ export const JSONview = (props) => {
         indentWidth={8}
         collapsed={false}
       />
+      } */}
+      <pre className="text-white">{JSON.stringify(props.json, null, 2)}</pre>
     </div>
   )
 }

@@ -20,7 +20,7 @@ export const Transfer = () => {
 
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-6'>
+          <div className='col-8'>
             <div className="input-group mb-3">
               <span className="input-group-text bg-2" id="basic-addon1">Address</span>
               <input type="text" className="form-control" placeholder="Address" aria-label="Address" aria-describedby="basic-addon1" onChange={(e) => setAddress(e.target.value)} />
