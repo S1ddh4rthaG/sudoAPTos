@@ -9,7 +9,7 @@ export const Resources = ({ isActive }) => {
   const { ACTIVE } = useContext(WalletContext);
   const { ADDR } = useContext(WalletContext);
   const { NETWORK } = useContext(WalletContext);
-  
+
   const [resources, setResources] = useState([]);
   const [selectedType, setSelectedType] = useState('');
   const [done, setDone] = useState(false);
@@ -45,9 +45,20 @@ export const Resources = ({ isActive }) => {
                       onChange={(e) => setSelectedType(e.target.value)}
                     >
                       <option value="" disabled>Select a resource type</option>
-                      {resources?.map((resource, index) => (
-                        <option key={index} value={resource.type}>{resource.type}</option>
-                      ))}
+                      {
+                        Array.isArray(resources) ?
+                          (resources.map((resource, index) => (
+                            <option key={index} value={resource.type}>{resource.type}</option>
+                          ))) :
+                          (
+                            <tr className='text-center'>
+                              <td colSpan={8}>
+                                <span className="badge bg-danger">No resources found</span>
+                                <p>The Account address might not be used in any transaction yet.</p>
+                              </td>
+                            </tr>
+                          )
+                      }
                     </select>
                   </div>
                   {selectedType ? (

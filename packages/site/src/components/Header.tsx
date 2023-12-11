@@ -3,8 +3,6 @@ import { connect, getAddress, createAccount, switchAccount } from '../methods/in
 
 import { WalletContext } from '../context/WalletContext';
 import { printAddress } from '../utils/functionals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 export const Header = () => {
@@ -64,7 +62,16 @@ export const Header = () => {
                       <button
                         key={account.id}
                         className={`dropdown-item`}
-                        onClick={() => { switchAccount(snapId, account.id) }}
+                        onClick={() => {
+                          switchAccount(snapId, account.id).then(
+                            async (result) => {
+                              if (result) {
+                                setAccountName(account.address);
+                                setADDR(account.address);
+                                setSelectedAccount(account.id);
+                              }
+                            })
+                        }}
                       >
                         {account.address}
                       </button>
@@ -90,14 +97,12 @@ export const Header = () => {
               createAccount(snapId).then(async (result) => {
                 if (result >= 0) {
                   setAccounts([...accounts, { id: result, address: JSON.parse(localStorage.getItem(result)).address }]);
-                  console.log("accounts ", accounts)
-                  console.log(localStorage.getItem(result))
-                  console.log("Line break")
-                  console.log()
                   switchAccount(snapId, result).then(async (result2) => {
                     if (result2) {
-
-                      console.log("switched account")
+                      const addr = JSON.parse(localStorage.getItem(result)).address;
+                      setAccountName(addr);
+                      setADDR(addr);
+                      setSelectedAccount(addr);
                     }
                   })
                 }
@@ -110,8 +115,7 @@ export const Header = () => {
               getAddress(snapId).then(async (result) => {
                 setAccountName(result);
                 setADDR(result);
-              }
-              )
+              })
             }
             }>
               Get Address

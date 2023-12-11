@@ -73,22 +73,34 @@ export const Transactions = ({ isActive }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {transactions?.map((transaction, index) => (
-                          <tr key={index} className='text-center'>
-                            <td>{transaction.version}</td>
-                            <td>{transaction.type}</td>
-                            <td>{transaction.success ? (
-                              <i className="bi bi-check-circle-fill text-success"></i>
-                            ) : (
-                              <i className="bi bi-x-circle-fill text-danger"></i>
-                            )}</td>
-                            <td>{formatTimestamp(transaction.timestamp)}</td>
-                            <td>{displayAndCopyAddress(transaction.sender)}</td>
-                            <td>{displayAndCopyAddress(transaction.payload.arguments[0])}</td>
-                            <td>{transaction.payload.function}</td>
-                            <td>{transaction.payload.arguments[1]}</td>
-                          </tr>
-                        ))}
+                        {
+                          // Check if it is an array and not an dictionary
+                          Array.isArray(transactions) ?
+                            (transactions.map((transaction, index) => (
+                              <tr key={index} className='text-center'>
+                                <td>{transaction.version}</td>
+                                <td>{transaction.type}</td>
+                                <td>{transaction.success ? (
+                                  <i className="bi bi-check-circle-fill text-success"></i>
+                                ) : (
+                                  <i className="bi bi-x-circle-fill text-danger"></i>
+                                )}</td>
+                                <td>{formatTimestamp(transaction.timestamp)}</td>
+                                <td>{displayAndCopyAddress(transaction.sender)}</td>
+                                <td>{displayAndCopyAddress(transaction.payload.arguments[0])}</td>
+                                <td>{transaction.payload.function}</td>
+                                <td>{transaction.payload.arguments[1]}</td>
+                              </tr>
+                            ))) :
+                            (
+                              <tr className='text-center'>
+                                <td colSpan={8}>
+                                  <span className="badge bg-danger">No transactions found</span>
+                                  <p>The Account address might not be used in any transaction yet.</p>
+                                </td>
+                              </tr>
+                            )
+                        }
                       </tbody>
                     </table>
                   </div>
