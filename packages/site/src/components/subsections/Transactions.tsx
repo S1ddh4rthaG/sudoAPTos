@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getAccountTransactions } from '../../methods/index';
 import { WalletContext } from '../../context/WalletContext';
+import TransactionDetails from './TransactionDetails'; // Import the new component
 
 export const Transactions = ({ isActive }) => {
   const { SNAP_ID } = useContext(WalletContext);
   const [transactions, setTransactions] = useState([]);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -43,6 +45,11 @@ export const Transactions = ({ isActive }) => {
     );
   };
 
+  // Handle the click on a transaction row
+  const handleTransactionClick = (transaction) => {
+    setSelectedTransaction(transaction);
+  };
+
   return (
     <>
       <h1>Transactions</h1>
@@ -69,7 +76,7 @@ export const Transactions = ({ isActive }) => {
                       </thead>
                       <tbody>
                         {transactions.map((transaction, index) => (
-                          <tr key={index}>
+                          <tr key={index} onClick={() => handleTransactionClick(transaction)} style={{ cursor: 'pointer' }}>
                             <td>{transaction.version}</td>
                             <td>{transaction.type}</td>
                             <td>{formatTimestamp(transaction.timestamp)}</td>
@@ -87,22 +94,23 @@ export const Transactions = ({ isActive }) => {
             </div>
           </div>
         </div>
-      ) :(
+      ) : (
         <div className="container">
           <div className="row">
             <div className="col">
               <div className="card">
-                <div className="card-body text-center">
-                  <h5 className="card-title">Resources</h5>
-                  <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
+                <div className="card-body">
+                  <h5 className="card-title">Transactions</h5>
+                  <p className="card-text">Loading...</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* Display the TransactionDetails component when a transaction is selected */}
+      {selectedTransaction && <TransactionDetails transaction={selectedTransaction} />}
     </>
   );
 };
