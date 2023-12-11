@@ -1,5 +1,6 @@
 export const connect = async (snapId: any) => {
   console.log('Connect Wallet');
+  localStorage.clear();
 
   let result;
   try {
@@ -18,10 +19,7 @@ export const connect = async (snapId: any) => {
   return true;
 }
 
-export const switchAccount = async (snapId: any) => {
-  let id = 3;
-  let net = "devnet"
-
+export const switchAccount = async (snapId: any,id: number, net: any) => {
   console.log("switch account")
   try {
     const out = await ethereum.request({
@@ -48,7 +46,17 @@ export const switchAccount = async (snapId: any) => {
 }
 
 export const createAccount = async (snapId: any) => {
-  let id = 2;
+
+  try{
+  const id= await ethereum.request({
+          method: 'wallet_invokeSnap',
+          params: {
+            snapId,
+            request: {
+              method: 'getId'
+            }
+          }
+        });;
   let net = "devnet";
 
   console.log('create account');
@@ -71,14 +79,22 @@ export const createAccount = async (snapId: any) => {
     let value = { address: out }
     const jsonString = JSON.stringify(value);
     localStorage.setItem(id.toString(), jsonString)
+    
 
   } catch (err) {
     console.error(err)
     alert('Problem happened: ' + err.message || err)
-    return false;
+    return -1;
   }
 
-  return true;
+  return id;
+
+}
+catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+    return false;
+  }
 }
 
 export const getAddress = async (snapId: any) => {
@@ -139,6 +155,7 @@ export const getBalance = async (snapId) => {
   } catch (err) {
     console.error(err)
     alert('Problem happened: ' + err.message || err)
+    return 0;
   }
 
   return -1;
@@ -288,6 +305,70 @@ export const getAccountModules = async (snapId: any) => {
     console.log(out);
     return out;
   } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+
+export const getStorage = async (snapId: any) => {
+  console.log('get storage')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getStorage'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const setStorage = async (snapID: any, data) => {
+  console.log('set storage')
+  try{
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId: snapID,
+        request: {
+          method: 'setStorage',
+          params: {
+            data: data
+          }
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  }catch(err){
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const clearStorage = async (snapID: any) => {
+  console.log('clear storage')
+  try{
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId: snapID,
+        request: {
+          method: 'clearStorage'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  }catch(err){
     console.error(err)
     alert('Problem happened: ' + err.message || err)
   }

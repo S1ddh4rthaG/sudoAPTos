@@ -5,7 +5,7 @@ export const WalletContext = createContext({
   SNAP_ID: "",
   ACTIVE: false,
   ADDR: "",
-  NETWORK: "",
+  NETWORK: "devnet",
   setSNAP_ID: (snapID: string) => { },
   setACTIVE: (active: boolean) => { },
   setADDR: (addr: string) => { },

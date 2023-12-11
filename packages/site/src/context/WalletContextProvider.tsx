@@ -15,7 +15,7 @@ export const WalletContextProvider: FunctionComponent = ({ children }) => {
   const [SNAP_ID, setSNAP_ID] = useState("");
   const [ACTIVE, setACTIVE] = useState(false);
   const [ADDR, setADDR] = useState("");
-  const [NETWORK, setNETWORK] = useState("");
+  const [NETWORK, setNETWORK] = useState("devnet");
 
   return (
     <WalletContext.Provider

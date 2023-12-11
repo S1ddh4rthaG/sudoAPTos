@@ -44,7 +44,7 @@ export class Metamask {
     
   }
 
-  static async paymentConfirmation(amount: bigint, address: string, network: string){
+  static async paymentConfirmation(amount: bigint, address: string, network: string, gasEstimate: any){
     const amount_string = ((Number(amount * BigInt(100000000) / BigInt(100000000)) / 100000000)).toFixed(8).replace(/\.?0+$/,"")
     const confirm = await snap.request({
       method: 'snap_dialog',
@@ -53,9 +53,13 @@ export class Metamask {
         content: panel([
           heading("Confirm Payment"),
           divider(),
-          text("network : "+network),
-          text(`${amount_string} Aptos`),
-          text("recipent"),
+          text(`Amount(APT)  : **${amount_string}**`),
+          text(`To Address   : **${address.slice(0, 6)}...${address.slice(-4)}**`),
+          text("Network      : " + `**${network}**`),
+          text(`Gas Estimate : **${gasEstimate}**`),
+          text(""),
+          divider(),
+          text("Recipent Address: "),
           copyable(address)
         ])
       }
@@ -118,4 +122,20 @@ export class Metamask {
     
     return confirm;
   }
+  
+  static async  takeInput(){
+  const walletId=await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'prompt',
+    content: panel([
+      heading('What is the wallet id?'),
+      text('Please enter the id for the account'),
+    ]),
+    placeholder: "1",
+  },
+});
+return walletId;
+}
+
 }

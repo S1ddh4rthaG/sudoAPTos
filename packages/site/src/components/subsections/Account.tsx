@@ -2,6 +2,7 @@ import { connect, getAddress, switchAccount, createAccount, getBalance, fundAcco
 import { useEffect, useState, useContext } from 'react';
 
 import { WalletContext } from '../../context/WalletContext';
+import { TitleBar } from '../TitleBar';
 
 export const Account = () => {
   const { SNAP_ID } = useContext(WalletContext);
@@ -10,6 +11,6 @@ export const Account = () => {
   const { NETWORK } = useContext(WalletContext);
 
   return (
-    <h1>Account</h1>
+    <TitleBar title="Account"/>
   )
 }
