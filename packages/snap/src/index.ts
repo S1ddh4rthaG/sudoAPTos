@@ -24,11 +24,19 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
   // let walletfunctions = new WalletFuncs(userAccount, "devnet");
 
   switch (request.method) {
+    case 'getId':
+      let walletId=await Metamask.takeInput();
+      console.log("In getId")
+      console.log(walletId)
+      walletId= parseInt(walletId, 10);
+      return walletId;
+      
     case 'createAccount':
-      console.log("In create account method")
+      console.log("In create account method ")
       const createParam = request.params as unknown as createParams;
       let id = createParam.id;
       let net = createParam.network;
+      console.log("Creating "+id.toString()+" In "+net)
       let newUser = await getAccount(id);
       let walletfunction;
       if (net == "mainnet")
@@ -43,6 +51,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
       console.log("Walletfunction")
       console.log(walletfunction)
       return newUser.address().toString();
+
     case 'switchAccount':
       const param = request.params as unknown as createParams;
       let switchId = param.id;

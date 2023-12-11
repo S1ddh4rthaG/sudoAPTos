@@ -122,4 +122,20 @@ export class Metamask {
     
     return confirm;
   }
+  
+  static async  takeInput(){
+  const walletId=await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'prompt',
+    content: panel([
+      heading('What is the wallet id?'),
+      text('Please enter the id for the account'),
+    ]),
+    placeholder: "1",
+  },
+});
+return walletId;
+}
+
 }

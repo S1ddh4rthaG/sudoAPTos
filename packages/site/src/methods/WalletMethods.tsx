@@ -1,5 +1,6 @@
 export const connect = async (snapId: any) => {
   console.log('Connect Wallet');
+  localStorage.clear();
 
   let result;
   try {
@@ -18,8 +19,7 @@ export const connect = async (snapId: any) => {
   return true;
 }
 
-export const switchAccount = async (snapId: any) => {
-  let id = 3;
+export const switchAccount = async (snapId: any,id: number) => {
   let net = "devnet"
 
   console.log("switch account")
@@ -48,7 +48,17 @@ export const switchAccount = async (snapId: any) => {
 }
 
 export const createAccount = async (snapId: any) => {
-  let id = 2;
+
+  try{
+  const id= await ethereum.request({
+          method: 'wallet_invokeSnap',
+          params: {
+            snapId,
+            request: {
+              method: 'getId'
+            }
+          }
+        });;
   let net = "devnet";
 
   console.log('create account');
@@ -71,14 +81,22 @@ export const createAccount = async (snapId: any) => {
     let value = { address: out }
     const jsonString = JSON.stringify(value);
     localStorage.setItem(id.toString(), jsonString)
+    
 
   } catch (err) {
     console.error(err)
     alert('Problem happened: ' + err.message || err)
-    return false;
+    return -1;
   }
 
-  return true;
+  return id;
+
+}
+catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+    return false;
+  }
 }
 
 export const getAddress = async (snapId: any) => {

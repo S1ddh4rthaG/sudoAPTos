@@ -3,12 +3,17 @@ import { connect, getAddress, createAccount, switchAccount } from '../methods/in
 
 import { WalletContext } from '../context/WalletContext';
 import { printAddress } from '../utils/functionals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 export const Header = () => {
   const [reconnect, setReconnect] = useState(false);
   const [network, setNetwork] = useState('devnet');
   const [accountName, setAccountName] = useState('Account');
   const [snapId, setSnapId] = useState('');
+  const [selectedAccount, setSelectedAccount] = useState(null);
+  const [accounts, setAccounts] = useState([]);
 
   const { setSNAP_ID } = React.useContext(WalletContext);
   const { setACTIVE } = React.useContext(WalletContext);
@@ -52,13 +57,37 @@ export const Header = () => {
               <button className="btn btn-secondary dropdown-toggle header-account" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {printAddress(accountName)}
               </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Select Account
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  {accounts.map(account => {
+                    return (
+                      <li>
+                      <button
+                        key={account.id}
+                        className={`dropdown-item header-select-account ${account.id === selectedAccount ? 'active' : ''
+                          }`}
+                        onClick={() => { switchAccount(snapId, account.id) }}
+                      >
+                        {account.address}
+                      </button>
+                      </li>
+                    )
+                  }
+                  )
+                  }
 
-                <li><button className="dropdown-item header-select-account" onClick={() => setAccountName('0x0000000')}>Acc_Names</button></li>
-
-                {/* <li><button className="dropdown-item header-add-account" onClick={() => addAccount()}>Add Account</button></li>
-                <li><button className="dropdown-item header-create-account" onClick={() => createAccount()}>Create Account</button></li> */}
-              </ul>
+                </div>
+              </div>
             </div>
             <button className='btn btn-primary' onClick={() => {
               connect(snapId).then(async (result) => {
@@ -76,9 +105,15 @@ export const Header = () => {
 
             <button className='btn btn-primary' onClick={() => {
               createAccount(snapId).then(async (result) => {
-                if (result) {
-                  switchAccount(snapId).then(async (result2) => {
+                if (result >= 0) {
+                  setAccounts([...accounts, { id: result, address: JSON.parse(localStorage.getItem(result)).address }]);
+                  console.log("accounts ", accounts)
+                  console.log(localStorage.getItem(result))
+                  console.log("Line break")
+                  console.log()
+                  switchAccount(snapId, result).then(async (result2) => {
                     if (result2) {
+
                       console.log("switched account")
                     }
                   })
