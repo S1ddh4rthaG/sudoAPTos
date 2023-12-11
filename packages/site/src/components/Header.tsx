@@ -57,35 +57,20 @@ export const Header = () => {
               <button className="btn btn-secondary dropdown-toggle header-account" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {printAddress(accountName)}
               </button>
-              <div className="dropdown">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="accountDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Select Account
-                </button>
-                <div className="dropdown-menu" aria-labelledby="accountDropdown">
-                  <ul className="dropdown-menu dropdown-menu-dark">
-                    {accounts.map(account => {
-                      return (
-                        <li>
-                          <button
-                            key={account.id}
-                            className={`dropdown-item header-select-account ${account.id === selectedAccount ? 'active' : ''
-                              }`}
-                            onClick={() => { switchAccount(snapId, account.id) }}
-                          >
-                            {account.address}
-                          </button>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              </div>
+              <ul className="dropdown-menu dropdown-menu-dark">
+                {accounts.map(account => {
+                  return (
+                    <li>
+                      <button
+                        key={account.id}
+                        className={`dropdown-item`}
+                        onClick={() => { switchAccount(snapId, account.id) }}
+                      >
+                        {account.address}
+                      </button>
+                    </li>)
+                })}
+              </ul>
             </div>
             <button className='btn btn-primary' onClick={() => {
               connect(snapId).then(async (result) => {
