@@ -310,3 +310,67 @@ export const getAccountModules = async (snapId: any) => {
     alert('Problem happened: ' + err.message || err)
   }
 }
+
+
+export const getStorage = async (snapId: any) => {
+  console.log('get storage')
+  try {
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request: {
+          method: 'getStorage'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  } catch (err) {
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const setStorage = async (snapID: any, data) => {
+  console.log('set storage')
+  try{
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId: snapID,
+        request: {
+          method: 'setStorage',
+          params: {
+            data: data
+          }
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  }catch(err){
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}
+
+export const clearStorage = async (snapID: any) => {
+  console.log('clear storage')
+  try{
+    const out = await ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId: snapID,
+        request: {
+          method: 'clearStorage'
+        }
+      }
+    })
+    console.log(out);
+    return out;
+  }catch(err){
+    console.error(err)
+    alert('Problem happened: ' + err.message || err)
+  }
+}

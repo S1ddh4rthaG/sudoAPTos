@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect, getAddress, createAccount, switchAccount } from '../methods/index';
+import { connect, getAddress, createAccount, switchAccount, setStorage, getStorage, clearStorage } from '../methods/index';
 
 import { WalletContext } from '../context/WalletContext';
 import { printAddress } from '../utils/functionals';
@@ -14,7 +14,7 @@ export const Header = () => {
   const [accounts, setAccounts] = useState([]);
 
   const { setSNAP_ID } = React.useContext(WalletContext);
-  const { setACTIVE } = React.useContext(WalletContext);
+  const { ACTIVE, setACTIVE } = React.useContext(WalletContext);
   const { setADDR } = React.useContext(WalletContext);
   const { setNETWORK } = React.useContext(WalletContext);
 
@@ -52,7 +52,16 @@ export const Header = () => {
               </ul>
             </div>
             <div className="dropdown ms-1 pe-5">
-              <button className="btn btn-secondary dropdown-toggle header-account" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button className="btn btn-secondary dropdown-toggle header-account" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                onClick={() => {
+                  if (ACTIVE)
+                    getStorage(snapId).then((result) => {
+                      if (result) {
+                        setAccounts(result['accounts'].data);
+                      }
+                    })
+                }}
+              >
                 {printAddress(accountName)}
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
@@ -79,7 +88,47 @@ export const Header = () => {
                 })}
               </ul>
             </div>
-            <button className='btn btn-primary' onClick={() => {
+            <button className='btn btn-primary me-1' onClick={() => {
+              clearStorage(snapId).then(async (result) => {
+                if (result) {
+                  setAccounts([]);
+                }
+              })
+            }
+            }>
+              <i className={"ms-2 me-2 p-1 bi bi-box-arrow-in-left"}></i>
+              Clear
+            </button>
+         
+
+            <button className='btn btn-primary me-1' onClick={() => {
+              createAccount(snapId).then(async (result) => {
+                if (result >= 0) {
+                  const acc = [...accounts, { id: result, address: JSON.parse(localStorage.getItem(result)).address }];
+                  setAccounts(acc);
+
+                  console.log("Storing accounts:", acc);
+                  setStorage(snapId, acc).then((result) => {
+                    console.log("Retrieved accounts:", result);
+                  })
+
+
+                  switchAccount(snapId, result).then(async (result2) => {
+                    if (result2) {
+                      const addr = JSON.parse(localStorage.getItem(result)).address;
+                      setAccountName(addr);
+                      setADDR(addr);
+                      setSelectedAccount(addr);
+                    }
+                  })
+                }
+              })
+            }}>
+              {'Add Account'}
+            </button>
+
+            <button className={'btn btn-primary me-1 fw-bold ' + (reconnect ? 'bg-primary' : 'bg-success')}
+            onClick={() => {
               connect(snapId).then(async (result) => {
                 if (result) {
                   setReconnect(true);
@@ -93,25 +142,7 @@ export const Header = () => {
               {reconnect ? 'Reconnect' : 'Connect'}
             </button>
 
-            <button className='btn btn-primary' onClick={() => {
-              createAccount(snapId).then(async (result) => {
-                if (result >= 0) {
-                  setAccounts([...accounts, { id: result, address: JSON.parse(localStorage.getItem(result)).address }]);
-                  switchAccount(snapId, result).then(async (result2) => {
-                    if (result2) {
-                      const addr = JSON.parse(localStorage.getItem(result)).address;
-                      setAccountName(addr);
-                      setADDR(addr);
-                      setSelectedAccount(addr);
-                    }
-                  })
-                }
-              })
-            }}>
-              {'Create & Switch Account'}
-            </button>
-
-            <button className='btn btn-primary' onClick={() => {
+            {/* <button className='btn btn-primary me-1' onClick={() => {
               getAddress(snapId).then(async (result) => {
                 setAccountName(result);
                 setADDR(result);
@@ -119,7 +150,7 @@ export const Header = () => {
             }
             }>
               Get Address
-            </button>
+            </button> */}
           </ul>
         </div>
       </nav>

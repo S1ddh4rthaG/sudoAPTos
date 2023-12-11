@@ -7,6 +7,11 @@ import { NetworkRequest } from './Utils/networkClient';
 import { WalletFuncs } from './Wallet/WalletFuncs';
 import { Metamask } from './Utils/Metamask';
 import { balanceCheck, lastTransactionCheck } from './cron';
+import {
+  getEncrptStorage,
+  setEncryptStorage,
+  clearEncryptStorage,
+} from './persistentStorage';
 
 //Global variables to maintain state of the current account and the net
 
@@ -143,7 +148,14 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
       console.log("index: estimateGasPrice");
       return await walletfunctions.estimateGasPrice();
 
+    case 'getStorage':
+      return await getEncrptStorage();
+    
+    case 'setStorage':
+      return await setEncryptStorage(request.params);
 
+    case 'clearStorage':
+      return await clearEncryptStorage();
 
     default:
       throw new Error('Method not found.');
@@ -189,12 +201,4 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
     default:
       throw new Error('Method not found. Please check your manifest. ' + request.method);
   }
-};
-
-export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
-  const insights = await getDetails(transaction);
-
-  return {
-    insights,
-  };
 };
