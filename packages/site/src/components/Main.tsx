@@ -22,7 +22,6 @@ export const Main = () => {
     setActiveTab(tab);
   };
 
-
   return (
     <main className="d-flex flex-column flex-fill main">
       <div className="d-flex flex-column flex-fill p-1 ps-3 pe-3">

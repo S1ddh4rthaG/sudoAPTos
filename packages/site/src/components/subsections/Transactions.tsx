@@ -59,7 +59,7 @@ export const Transactions = ({ isActive }) => {
               <div className="card p-0 bg-2 border-0">
                 <div className="card-body p-0">
                   <div className="table-responsive">
-                    <table className="table table-striped">
+                    <table className="table table-dark table-striped table-hover table-bordered">
                       <thead className="table-dark">
                         <tr className='text-center'>
                           <th>VERSION</th>
