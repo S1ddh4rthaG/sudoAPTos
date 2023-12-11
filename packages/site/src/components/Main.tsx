@@ -36,8 +36,8 @@ export const Main = () => {
                 </div>
               </div>
             </div>
-            <div className="col-3 text-center">
-              <button className="btn btn-primary btn-lg mt-3" onClick={() => {
+            <div className={"col-3 text-center"}>
+              <button className={"btn btn-primary btn-lg mt-3"} onClick={() => {
                 fundAccount(SNAP_ID).then((result) => {
                   console.log(result);
                 });
@@ -47,11 +47,11 @@ export const Main = () => {
             <div className="card col-3 text-start shadow-sm bg-2">
               <div className="card-body">
                 <h5 className="card-title">Balance (octo-APT) <span className='refresh ms-2 btn p-0 m-0 border-0 text-success fw-bold fs-5' onClick={() => {
-                  if(ACTIVE)
-                  getBalance(SNAP_ID).then((result) => {
-                    if (result >= 0) setBalance(result);
-                  }
-                  );
+                  if (ACTIVE)
+                    getBalance(SNAP_ID).then((result) => {
+                      if (result >= 0) setBalance(result);
+                    }
+                    );
                 }
                 }><i className="bi bi-arrow-clockwise"></i></span></h5>
                 <p className="card-text main-balance"><span className="fw-bold me-2">{balance}</span></p>

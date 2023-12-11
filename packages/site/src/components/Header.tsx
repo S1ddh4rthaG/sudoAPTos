@@ -9,13 +9,14 @@ export const Header = () => {
   const [reconnect, setReconnect] = useState(false);
   const [network, setNetwork] = useState('devnet');
   const [accountName, setAccountName] = useState('Account');
+  const [accountID, setAccountID] = useState(0);
   const [snapId, setSnapId] = useState('');
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [accounts, setAccounts] = useState([]);
 
   const { setSNAP_ID } = React.useContext(WalletContext);
   const { ACTIVE, setACTIVE } = React.useContext(WalletContext);
-  const { setADDR } = React.useContext(WalletContext);
+  const { ADDR, setADDR } = React.useContext(WalletContext);
   const { setNETWORK } = React.useContext(WalletContext);
 
   useEffect(() => {
@@ -27,6 +28,10 @@ export const Header = () => {
 
   const handleNetworkChange = (network: string) => {
     setNetwork(network);
+    switchAccount(snapId, selectedAccount, network ).then(
+      async (result) => {
+        console.log("Switched network:", result, network);
+      })
   };
 
   return (
@@ -67,12 +72,12 @@ export const Header = () => {
               <ul className="dropdown-menu dropdown-menu-dark">
                 {accounts.map(account => {
                   return (
-                    <li>
+                    <li key={`${account.id}li`}>
                       <button
                         key={account.id}
                         className={`dropdown-item`}
                         onClick={() => {
-                          switchAccount(snapId, account.id).then(
+                          switchAccount(snapId, account.id, network | "devnet").then(
                             async (result) => {
                               if (result) {
                                 setAccountName(account.address);
@@ -99,7 +104,7 @@ export const Header = () => {
               <i className={"ms-2 me-2 p-1 bi bi-box-arrow-in-left"}></i>
               Clear
             </button>
-         
+
 
             <button className='btn btn-primary me-1' onClick={() => {
               createAccount(snapId).then(async (result) => {
@@ -113,7 +118,7 @@ export const Header = () => {
                   })
 
 
-                  switchAccount(snapId, result).then(async (result2) => {
+                  switchAccount(snapId, result, network | "devnet").then(async (result2) => {
                     if (result2) {
                       const addr = JSON.parse(localStorage.getItem(result)).address;
                       setAccountName(addr);
@@ -128,17 +133,17 @@ export const Header = () => {
             </button>
 
             <button className={'btn btn-primary me-1 fw-bold ' + (reconnect ? 'bg-primary' : 'bg-success')}
-            onClick={() => {
-              connect(snapId).then(async (result) => {
-                if (result) {
-                  setReconnect(true);
-                  setACTIVE(true);
-                } else {
-                  setReconnect(false);
-                  setACTIVE(false);
-                }
-              })
-            }}>
+              onClick={() => {
+                connect(snapId).then(async (result) => {
+                  if (result) {
+                    setReconnect(true);
+                    setACTIVE(true);
+                  } else {
+                    setReconnect(false);
+                    setACTIVE(false);
+                  }
+                })
+              }}>
               {reconnect ? 'Reconnect' : 'Connect'}
             </button>
 

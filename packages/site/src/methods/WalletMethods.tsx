@@ -19,9 +19,7 @@ export const connect = async (snapId: any) => {
   return true;
 }
 
-export const switchAccount = async (snapId: any,id: number) => {
-  let net = "devnet"
-
+export const switchAccount = async (snapId: any,id: number, net: any) => {
   console.log("switch account")
   try {
     const out = await ethereum.request({
@@ -157,6 +155,7 @@ export const getBalance = async (snapId) => {
   } catch (err) {
     console.error(err)
     alert('Problem happened: ' + err.message || err)
+    return 0;
   }
 
   return -1;
