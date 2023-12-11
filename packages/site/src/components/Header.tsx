@@ -61,31 +61,29 @@ export const Header = () => {
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
+                  id="accountDropdown"
+                  data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Select Account
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {accounts.map(account => {
-                    return (
-                      <li>
-                      <button
-                        key={account.id}
-                        className={`dropdown-item header-select-account ${account.id === selectedAccount ? 'active' : ''
-                          }`}
-                        onClick={() => { switchAccount(snapId, account.id) }}
-                      >
-                        {account.address}
-                      </button>
-                      </li>
-                    )
-                  }
-                  )
-                  }
-
+                <div className="dropdown-menu" aria-labelledby="accountDropdown">
+                  <ul className="dropdown-menu dropdown-menu-dark">
+                    {accounts.map(account => {
+                      return (
+                        <li>
+                          <button
+                            key={account.id}
+                            className={`dropdown-item header-select-account ${account.id === selectedAccount ? 'active' : ''
+                              }`}
+                            onClick={() => { switchAccount(snapId, account.id) }}
+                          >
+                            {account.address}
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </div>
               </div>
             </div>
