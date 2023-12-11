@@ -75,3 +75,6 @@ node_modules/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.yarn/releases/yarn-3.2.1.cjs
+.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs
+.yarn/plugins/@yarnpkg/plugin-allow-scripts.cjs
