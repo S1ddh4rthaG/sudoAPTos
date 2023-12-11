@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { getAccountTransactions } from '../../methods/index';
 import { WalletContext } from '../../context/WalletContext';
 import { TitleBar } from '../TitleBar';
+import moment from 'moment';
 
 export const Transactions = ({ isActive }) => {
   const { SNAP_ID } = useContext(WalletContext);
@@ -26,7 +27,11 @@ export const Transactions = ({ isActive }) => {
   // Format timestamp in "MM/DD/YYYY HH:mm:ss" format
   const formatTimestamp = (timestamp) => {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    return new Date(timestamp / 1000000).toLocaleDateString('en-US', options);
+    // return new Date(timestamp * 1000).toDateString();
+    console.log(timestamp);
+    if(timestamp.length > 10) timestamp = timestamp.slice(0, 10);
+    else if (timestamp.length < 10) timestamp = timestamp + '0'.repeat(10 - timestamp.length);
+    return moment.unix(timestamp).format("MM/DD/YYYY HH:mm:ss");
   };
 
   // Display a brief part of the address and copy the complete address to clipboard when clicked

@@ -87,7 +87,7 @@ export const Header = () => {
                             })
                         }}
                       >
-                        {account.address}
+                        {printAddress(account.address)}
                       </button>
                     </li>)
                 })}

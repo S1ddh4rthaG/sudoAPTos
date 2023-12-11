@@ -31,7 +31,7 @@ export const Main = () => {
               <div className="card shadow-sm bg-2">
                 <div className="card-body">
                   <h2 className="card-title">Wallet Address</h2>
-                  <h6 className="card-text main-address">{ADDR}</h6>
+                  <h6 className="card-text main-address fw-bold fs-6">{ADDR}</h6>
                 </div>
               </div>
             </div>

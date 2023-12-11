@@ -13376,7 +13376,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment@npm:^2.29.1":
+"moment@npm:^2.29.1, moment@npm:^2.29.4":
   version: 2.29.4
   resolution: "moment@npm:2.29.4"
   checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
@@ -15963,6 +15963,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-promise: ^6.1.1
     jquery: ^3.7.1
+    moment: ^2.29.4
     prettier: ^2.7.1
     prettier-plugin-packagejson: ^2.2.18
     react-json-view: ^1.21.3
@@ -16460,50 +16461,6 @@ __metadata:
   checksum: aba6438f46d2bfcef94cf112c835ab395172c75f67453fe05c340c770d3c402363018ae1ab4172a1026a90c47eaccf3af7b6ff6fa749a680c2929bd7fa2b37a4
   languageName: node
   linkType: hard
-
-"site@workspace:packages/site":
-  version: 0.0.0-use.local
-  resolution: "site@workspace:packages/site"
-  dependencies:
-    "@metamask/eslint-config": ^12.2.0
-    "@metamask/eslint-config-browser": ^12.1.0
-    "@metamask/eslint-config-jest": ^12.1.0
-    "@metamask/eslint-config-nodejs": ^12.1.0
-    "@metamask/eslint-config-typescript": ^12.1.0
-    "@metamask/providers": ^14.0.0
-    "@svgr/webpack": ^6.4.0
-    "@testing-library/dom": ^8.17.1
-    "@testing-library/jest-dom": ^5.16.4
-    "@testing-library/react": ^13.3.0
-    "@testing-library/user-event": ^13.5.0
-    "@types/jest": ^27.5.2
-    "@types/react": ^18.0.15
-    "@types/react-dom": ^18.0.6
-    "@types/styled-components": ^5.1.25
-    "@typescript-eslint/eslint-plugin": ^5.42.1
-    "@typescript-eslint/parser": ^5.42.1
-    eslint: ^8.45.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-import: ~2.26.0
-    eslint-plugin-jest: ^27.1.5
-    eslint-plugin-jsdoc: ^41.1.2
-    eslint-plugin-n: ^15.7.0
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-promise: ^6.1.1
-    gatsby: ^4.25.7
-    gatsby-plugin-manifest: ^4.24.0
-    gatsby-plugin-styled-components: ^5.24.0
-    gatsby-plugin-svgr: ^3.0.0-beta.0
-    prettier: ^2.7.1
-    prettier-plugin-packagejson: ^2.2.18
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-is: ^18.2.0
-    rimraf: ^3.0.2
-    styled-components: 5.3.3
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
 
 "slash@npm:^2.0.0":
   version: 2.0.0
@@ -17209,6 +17166,50 @@ __metadata:
   checksum: bacff1f18a8ab8dba345cc1f3cf3a02b4cc571f71585df79af95af31278f56107f7c29402f5347b07c489888c63f2deb78d544b93a6347e83d0ed0847f4bc163
   languageName: node
   linkType: hard
+
+"sudoaptos-dapps@workspace:packages/site":
+  version: 0.0.0-use.local
+  resolution: "sudoaptos-dapps@workspace:packages/site"
+  dependencies:
+    "@metamask/eslint-config": ^12.2.0
+    "@metamask/eslint-config-browser": ^12.1.0
+    "@metamask/eslint-config-jest": ^12.1.0
+    "@metamask/eslint-config-nodejs": ^12.1.0
+    "@metamask/eslint-config-typescript": ^12.1.0
+    "@metamask/providers": ^14.0.0
+    "@svgr/webpack": ^6.4.0
+    "@testing-library/dom": ^8.17.1
+    "@testing-library/jest-dom": ^5.16.4
+    "@testing-library/react": ^13.3.0
+    "@testing-library/user-event": ^13.5.0
+    "@types/jest": ^27.5.2
+    "@types/react": ^18.0.15
+    "@types/react-dom": ^18.0.6
+    "@types/styled-components": ^5.1.25
+    "@typescript-eslint/eslint-plugin": ^5.42.1
+    "@typescript-eslint/parser": ^5.42.1
+    eslint: ^8.45.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-import: ~2.26.0
+    eslint-plugin-jest: ^27.1.5
+    eslint-plugin-jsdoc: ^41.1.2
+    eslint-plugin-n: ^15.7.0
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-promise: ^6.1.1
+    gatsby: ^4.25.7
+    gatsby-plugin-manifest: ^4.24.0
+    gatsby-plugin-styled-components: ^5.24.0
+    gatsby-plugin-svgr: ^3.0.0-beta.0
+    prettier: ^2.7.1
+    prettier-plugin-packagejson: ^2.2.18
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-is: ^18.2.0
+    rimraf: ^3.0.2
+    styled-components: 5.3.3
+    typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
 
 "superstruct@npm:^0.16.7":
   version: 0.16.7
