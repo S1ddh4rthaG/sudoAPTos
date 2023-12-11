@@ -1,17 +1,17 @@
 {
   "version": "0.0.1",
-  "description": "Aptos on Metamask",
-  "proposedName": "Aptos",
+  "description": "Aptos<>Metamask Snap",
+  "proposedName": "sudoAPTos",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kyraview/AptosSnap.git"
+    "url": "https://github.com/S1ddh4rthaG/sudoAPTos.git"
   },
   "source": {
-    "shasum": "7yPax3v857bRCkqqbiX3as5y4Vt+V1Ax6jwichIg0oI=",
+    "shasum": "HsCua/Bw0AgUHJordn0arrGgYCtq+fIyG8NTbSWA3lY=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "packageName": "meta-aptos",
+        "packageName": "sudo-aptos",
         "registry": "https://registry.npmjs.org/",
         "iconPath": "images/icon.svg"
       }

@@ -1,10 +1,10 @@
 {
-  "name": "meta-aptos",
+  "name": "sudo-aptos",
   "version": "0.0.1",
-  "description": "An Aptos Wallet on Metamask",
+  "description": "Aptos<>Metamask Snap",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kyraview/AptosSnap.git"
+    "url": "https://github.com/S1ddh4rthaG/sudoAPTos.git"
   },
   "license": "MIT",
   "main": "src/index.ts",
